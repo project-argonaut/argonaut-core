@@ -36,6 +36,11 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
     }
 
     @Override
+    public void error(String message) {
+        getLogger().severe(message);
+    }
+
+    @Override
     public void onEnable() {
         ConcurrencyUtil.syncLater(() -> Bukkit.getPluginManager().callEvent(new ServerFinishLoadingEvent()), 1);
 
@@ -68,7 +73,9 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
     }
 
     @Override
-    public void onDisable() { /* TODO: Safely terminate */ }
+    public void onDisable() {
+        this.getModuleManager().disableModules();
+    }
 
     @Override
     public IArgonautModuleManager getModuleManager() {

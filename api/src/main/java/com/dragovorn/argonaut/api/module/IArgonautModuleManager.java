@@ -1,5 +1,7 @@
 package com.dragovorn.argonaut.api.module;
 
+import com.google.common.collect.ImmutableCollection;
+
 public interface IArgonautModuleManager {
 
     void enableModules();
@@ -11,4 +13,6 @@ public interface IArgonautModuleManager {
     AbstractArgonautModule getModule(Class<? extends AbstractArgonautModule> clazz);
 
     AbstractArgonautModule getModule(String name);
+
+    ImmutableCollection<AbstractArgonautModule> getModules();
 }

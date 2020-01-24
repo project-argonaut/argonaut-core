@@ -21,6 +21,8 @@ public abstract class ArgonautAPI extends JavaPlugin {
 
     public abstract void warn(String message);
 
+    public abstract void error(String message);
+
     public abstract IArgonautModuleManager getModuleManager();
 
     public abstract INMSManager getNMSManager();

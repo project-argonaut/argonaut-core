@@ -4,6 +4,7 @@ import com.dragovorn.argonaut.api.ArgonautAPI;
 import com.dragovorn.argonaut.api.module.AbstractArgonautModule;
 import com.dragovorn.argonaut.api.module.ArgonautModule;
 import com.dragovorn.argonaut.api.module.IArgonautModuleManager;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -31,9 +32,26 @@ public final class ArgonautModuleManager implements IArgonautModuleManager {
 
         modules.forEach(module -> this.addToEnableOrder(module, layers));
 
+        ArgonautAPI api = ArgonautAPI.get();
+
+        api.info("Enabling modules...");
+
         for (AbstractArgonautModule module : this.enableOrder) {
-            module.onModuleEnable(ArgonautAPI.get());
+            ArgonautModule info = module.getModuleInfo();
+            api.info("Enabling module: " + info.name() + " (v " + info.version() + ") by: " + Arrays.toString(info.authors()) + "...");
+            try {
+                module.onModuleEnable(ArgonautAPI.get());
+                api.info("Enabled module: " + info.name() + "!");
+            } catch (Throwable e) {
+                api.error("Caught exception while enabling module " + info.name() + ":");
+                this.enableOrder.remove(module);
+                this.registeredModulesByClass.remove(module.getClass());
+                this.registeredModulesByString.remove(info.name());
+                e.printStackTrace();
+            }
         }
+
+        api.info("Successfully enabled " + this.enableOrder.size() + " modules!");
     }
 
     private void addToEnableOrder(AbstractArgonautModule module, Stack<AbstractArgonautModule> layers) {
@@ -59,9 +77,26 @@ public final class ArgonautModuleManager implements IArgonautModuleManager {
     public void disableModules() {
         ArrayList<AbstractArgonautModule> disableOrder = Lists.newArrayList(this.enableOrder);
 
+        ArgonautAPI api = ArgonautAPI.get();
+
+        api.info("Disabling " + disableOrder.size() + " modules...");
+
         for (int x = disableOrder.size() - 1; x >= 0; x--) {
-            disableOrder.get(x).onModuleDisable(ArgonautAPI.get());
+            AbstractArgonautModule module = disableOrder.get(x);
+            ArgonautModule info = module.getModuleInfo();
+
+            api.info("Disabling " + info.name() + "...");
+
+            try {
+                module.onModuleDisable(ArgonautAPI.get());
+                api.info("Disabled " + info.name() + "!");
+            } catch (Throwable e) {
+                api.error("Caught exception when disabling module: " + info.name() + "!");
+                e.printStackTrace();
+            }
         }
+
+        api.info("Disabled all modules!");
     }
 
     @Override
@@ -80,5 +115,10 @@ public final class ArgonautModuleManager implements IArgonautModuleManager {
     @Override
     public AbstractArgonautModule getModule(String name) {
         return this.registeredModulesByString.get(name);
+    }
+
+    @Override
+    public ImmutableList<AbstractArgonautModule> getModules() {
+        return ImmutableList.copyOf(this.registeredModulesByClass.values());
     }
 }

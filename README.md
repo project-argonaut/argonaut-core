@@ -1,7 +1,7 @@
 Argonaut Core
 =============
 This plugin is the core of the argonaut rpg system it will handle the following:
-- Argonaut Module Loading
+- Module Loading
 - Regions
 - Quests
 - NPCs
@@ -35,11 +35,15 @@ Some commands will remain internal, as they are not intended to be executed manu
 - `/argonaut region delete <name>` - Deletes the given region.
 - `/argonaut region info <name>` - Displays the information of the given region.
 
+Developing Modules
+------------------
+**TODO**
+
 TODO
 ----
 - [x] Initial plugin base
 - [x] NMSInterfaces for supporting multiple MC versions
-- [ ] Module loading system (will piggie back off of Bukkit's plugin loading)
+- [x] Module loading system (will piggie back off of Bukkit's plugin loading)
 - [ ] Command API
 - [ ] Inventory Menu API
 - [ ] Book GUI API
