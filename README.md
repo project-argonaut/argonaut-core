@@ -1,5 +1,6 @@
 Argonaut Core
 =============
+[![Build Status](https://travis-ci.org/project-argonaut/argonaut-core.svg?branch=master)](https://travis-ci.org/project-argonaut/argonaut-core)  
 This plugin is the core of the argonaut rpg system it will handle the following:
 - Module Loading
 - Regions
