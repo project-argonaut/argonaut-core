@@ -1,13 +1,13 @@
 echo "Building plugin..."
-mvn -T 4 clean install
+mvn -T 4 clean install shade:shade
 STATUS=$?
 
 if [ $STATUS -eq 0 ]; then
     echo "Build passed! Copying completed plugin..."
-    cp target/argonaut-core.jar ../test-server/plugins/
+    cp core/target/argonaut-core.jar test-server/plugins/
     echo "Launching server..."
     cd test-server/
-    java -jar server.jar
+    java -jar server.jar -nogui
 else
     echo "Build failed! Check maven logs!"
 fi

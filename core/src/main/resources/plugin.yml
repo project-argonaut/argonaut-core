@@ -1,0 +1,25 @@
+name: Argonaut
+version: ${project.version}
+authors:
+  - Dragovorn
+api-version: "1.15"
+main: com.dragovorn.argonaut.core.ArgonautCorePlugin
+softdepend:
+  - ProtocolLib
+commands:
+  argonaut:
+    aliases:
+      - a
+      - ag
+    description: Base command for argonaut
+    permission-message: You are not permitted to use this command!
+    permission: argonaut.command
+permissions:
+  argonaut.command:
+    default: true
+  argonaut.command.*:
+    default: op
+    children:
+      argonaut.command.version: true
+  argonaut.command.version:
+    default: true

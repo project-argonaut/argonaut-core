@@ -3,7 +3,7 @@ echo "Configuring test server..."
 mkdir test-server/
 cd test-server/
 echo "Downloading paper 1.15.2..."
-wget -O https://papermc.io/api/v1/paper/1.15.2/71/download server.jar
+wget -O server.jar https://papermc.io/api/v1/paper/1.15.2/71/download
 echo "Agreeing to EULA..."
 echo "eula=true" >> eula.txt
 echo "Creating plugins folder..."
