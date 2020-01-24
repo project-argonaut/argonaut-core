@@ -47,14 +47,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.dragovorn.argonaut.core</groupId>
+            <groupId>com.dragovorn.argonaut</groupId>
             <artifactId>api</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.dragovorn.argonaut.core</groupId>
+            <groupId>com.dragovorn.argonaut</groupId>
             <artifactId>protocol-lib</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>
