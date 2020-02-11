@@ -57,7 +57,7 @@ TODO
     - [ ] ProtocolLib packet interface.
     - [ ] Bukkit API interfaces.
 - [x] Module API
-    - [ ] Plugin Modules
+    - [x] Plugin Modules
     - [ ] Internal Modules
     - [x] Loading
     - [x] Dependencies
