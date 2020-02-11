@@ -2,12 +2,17 @@ Argonaut Core
 =============
 [![Build Status](https://travis-ci.org/project-argonaut/argonaut-core.svg?branch=master)](https://travis-ci.org/project-argonaut/argonaut-core)  
 This plugin is the core of the argonaut rpg system it will handle the following:
-- Module Loading
+- Modules
 - Regions
 - Quests
 - NPCs
-- Custom Damage and Abilities
-- General API
+- Custom HP Values
+- Abilities
+- Custom Systems
+    - Mana
+    - Stamina
+    - Fury
+- Classes
 
 Argonaut is currently in development, so please be patient as these features slowly find their way into the system!
 
@@ -40,23 +45,40 @@ Developing Modules
 ------------------
 **TODO**
 
+Common Errors
+-------------
+**TODO**
+
 TODO
 ----
 - [x] Initial plugin base
-- [x] NMSInterfaces for supporting multiple MC versions
-- [x] Module loading system (will piggie back off of Bukkit's plugin loading)
+- [x] Version interfaces
+    - [ ] NMS interfaces.
+    - [ ] ProtocolLib packet interface.
+    - [ ] Bukkit API interfaces.
+- [x] Module API
+    - [ ] Plugin Modules
+    - [ ] Internal Modules
+    - [x] Loading
+    - [x] Dependencies
+    - [ ] Service injectors
 - [ ] Command API
+- [ ] Advanced Listener API
 - [ ] Inventory Menu API
 - [ ] Book GUI API
 - [ ] Sign GUI API
 - [ ] Anvil GUI API
 - [ ] Hologram API
-- [ ] API for regions
-- [ ] Data-driven region loading
-- [ ] In-game region configuration
-- [ ] API for NPCs
-- [ ] Data-driven NPC loading
-- [ ] In-game NPC configuration
-- [ ] API for quests
-- [ ] Data-driven quest loading
-- [ ] In-gam quest configuration
+- [ ] Regions
+    - [ ] API
+    - [ ] Data-driven loading
+    - [ ] In-game configuration
+- [ ] NPCs
+    - [ ] API
+    - [ ] Data-driven loading
+    - [ ] In-game configuration
+- [ ] Quests
+    - [ ] API
+    - [ ] Data-driven loading
+    - [ ] In-game configuration
+- [ ] Custom Damage

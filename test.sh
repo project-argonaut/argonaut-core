@@ -1,5 +1,5 @@
 echo "Building plugin..."
-mvn -T 4 clean install shade:shade
+mvn -T 4 -Dstyle.color=always clean install shade:shade
 STATUS=$?
 
 if [ $STATUS -eq 0 ]; then

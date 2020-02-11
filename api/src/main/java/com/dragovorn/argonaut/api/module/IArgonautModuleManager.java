@@ -1,6 +1,6 @@
 package com.dragovorn.argonaut.api.module;
 
-import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.ImmutableList;
 
 public interface IArgonautModuleManager {
 
@@ -8,11 +8,19 @@ public interface IArgonautModuleManager {
 
     void disableModules();
 
-    void registerModule(AbstractArgonautModule module, ArgonautModule moduleInfo);
+    void registerModulePackage(String packagePath);
 
-    AbstractArgonautModule getModule(Class<? extends AbstractArgonautModule> clazz);
+    void registerModule(IModule module, ArgonautModule moduleInfo);
 
-    AbstractArgonautModule getModule(String name);
+    boolean isRegistered(Class<? extends IModule> clazz);
 
-    ImmutableCollection<AbstractArgonautModule> getModules();
+    boolean isRegistered(String name);
+
+    IModule getModule(Class<? extends IModule> clazz);
+
+    IModule getModule(String name);
+
+    ImmutableList<IModule> getModules();
+
+    ImmutableList<String> getModulePackages();
 }

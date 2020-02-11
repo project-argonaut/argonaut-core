@@ -1,12 +1,14 @@
 package com.dragovorn.argonaut.core.module;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
-import com.dragovorn.argonaut.api.module.AbstractArgonautModule;
 import com.dragovorn.argonaut.api.module.ArgonautModule;
 import com.dragovorn.argonaut.api.module.IArgonautModuleManager;
+import com.dragovorn.argonaut.api.module.IModule;
+import com.dragovorn.argonaut.api.util.StringUtil;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,28 +17,33 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 
-public final class ArgonautModuleManager implements IArgonautModuleManager {
+public final class ArgonautModuleManager implements IArgonautModuleManager, Listener {
 
-    private final Map<Class<? extends AbstractArgonautModule>, AbstractArgonautModule> registeredModulesByClass = Maps.newHashMap();
-    private final Map<String, AbstractArgonautModule> registeredModulesByString = Maps.newHashMap();
+    private final Map<Class<? extends IModule>, IModule> registeredModulesByClass = Maps.newHashMap();
 
-    private final LinkedList<AbstractArgonautModule> enableOrder = Lists.newLinkedList();
+    private final Map<String, IModule> registeredModulesByString = Maps.newHashMap();
+
+    private final LinkedList<IModule> enableOrder = Lists.newLinkedList();
+
+    private final LinkedList<String> modulePaths = Lists.newLinkedList();
 
     @Override
     public void enableModules() {
         this.enableOrder.clear();
 
-        Collection<AbstractArgonautModule> modules = this.registeredModulesByString.values();
+        Collection<IModule> modules = this.registeredModulesByString.values();
 
-        Stack<AbstractArgonautModule> layers = new Stack<>();
+        Stack<IModule> layers = new Stack<>();
 
         modules.forEach(module -> this.addToEnableOrder(module, layers));
 
+        String moduleStr = StringUtil.getPlural("module", this.enableOrder.size());
+
         ArgonautAPI api = ArgonautAPI.get();
 
-        api.info("Enabling modules...");
+        api.info("Enabling " + moduleStr + "...");
 
-        for (AbstractArgonautModule module : this.enableOrder) {
+        for (IModule module : this.enableOrder) {
             ArgonautModule info = module.getModuleInfo();
             api.info("Enabling module: " + info.name() + " (v " + info.version() + ") by: " + Arrays.toString(info.authors()) + "...");
             try {
@@ -48,13 +55,14 @@ public final class ArgonautModuleManager implements IArgonautModuleManager {
                 this.registeredModulesByClass.remove(module.getClass());
                 this.registeredModulesByString.remove(info.name());
                 e.printStackTrace();
+                api.error("Removing " + info.name() + " from registered modules!");
             }
         }
 
-        api.info("Successfully enabled " + this.enableOrder.size() + " modules!");
+        api.info("Successfully enabled " + this.enableOrder.size() + " " + moduleStr + "!");
     }
 
-    private void addToEnableOrder(AbstractArgonautModule module, Stack<AbstractArgonautModule> layers) {
+    private void addToEnableOrder(IModule module, Stack<IModule> layers) {
         if (layers.contains(module)) {
             throw new RuntimeException("Circular dependency found! " + module.getModuleInfo().name() + " is a circular dependency!");
         }
@@ -75,14 +83,16 @@ public final class ArgonautModuleManager implements IArgonautModuleManager {
 
     @Override
     public void disableModules() {
-        ArrayList<AbstractArgonautModule> disableOrder = Lists.newArrayList(this.enableOrder);
+        ArrayList<IModule> disableOrder = Lists.newArrayList(this.enableOrder);
 
         ArgonautAPI api = ArgonautAPI.get();
 
-        api.info("Disabling " + disableOrder.size() + " modules...");
+        String modules = StringUtil.getPlural("module", disableOrder.size());
+
+        api.info("Disabling " + disableOrder.size() + " " + modules + "...");
 
         for (int x = disableOrder.size() - 1; x >= 0; x--) {
-            AbstractArgonautModule module = disableOrder.get(x);
+            IModule module = disableOrder.get(x);
             ArgonautModule info = module.getModuleInfo();
 
             api.info("Disabling " + info.name() + "...");
@@ -96,11 +106,16 @@ public final class ArgonautModuleManager implements IArgonautModuleManager {
             }
         }
 
-        api.info("Disabled all modules!");
+        api.info("Disabled " + disableOrder.size() + " " + modules + "!");
     }
 
     @Override
-    public void registerModule(AbstractArgonautModule module, ArgonautModule moduleInfo) {
+    public void registerModulePackage(String packagePath) {
+
+    }
+
+    @Override
+    public void registerModule(IModule module, ArgonautModule moduleInfo) {
         module.setModuleInfo(moduleInfo);
 
         this.registeredModulesByClass.put(module.getClass(), module);
@@ -108,17 +123,32 @@ public final class ArgonautModuleManager implements IArgonautModuleManager {
     }
 
     @Override
-    public AbstractArgonautModule getModule(Class<? extends AbstractArgonautModule> clazz) {
+    public boolean isRegistered(Class<? extends IModule> clazz) {
+        return this.registeredModulesByClass.containsKey(clazz);
+    }
+
+    @Override
+    public boolean isRegistered(String name) {
+        return this.registeredModulesByString.containsKey(name);
+    }
+
+    @Override
+    public IModule getModule(Class<? extends IModule> clazz) {
         return this.registeredModulesByClass.get(clazz);
     }
 
     @Override
-    public AbstractArgonautModule getModule(String name) {
+    public IModule getModule(String name) {
         return this.registeredModulesByString.get(name);
     }
 
     @Override
-    public ImmutableList<AbstractArgonautModule> getModules() {
+    public ImmutableList<IModule> getModules() {
         return ImmutableList.copyOf(this.registeredModulesByClass.values());
+    }
+
+    @Override
+    public ImmutableList<String> getModulePackages() {
+        return ImmutableList.copyOf(this.modulePaths);
     }
 }

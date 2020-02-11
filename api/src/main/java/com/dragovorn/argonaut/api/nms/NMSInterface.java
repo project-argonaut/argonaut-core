@@ -12,6 +12,4 @@ public @interface NMSInterface {
     String internalName();
 
     String name();
-
-    String version();
 }

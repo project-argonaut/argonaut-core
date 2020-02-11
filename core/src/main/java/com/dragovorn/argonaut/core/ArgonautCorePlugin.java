@@ -6,7 +6,7 @@ import com.dragovorn.argonaut.api.module.IArgonautModuleManager;
 import com.dragovorn.argonaut.api.nms.INMSManager;
 import com.dragovorn.argonaut.api.util.ConcurrencyUtil;
 import com.dragovorn.argonaut.core.command.ArgonautCommandExecutor;
-import com.dragovorn.argonaut.core.listener.ServerFinishLoadingListener;
+import com.dragovorn.argonaut.core.module.DetectAndEnableModules;
 import com.dragovorn.argonaut.core.module.ArgonautModuleManager;
 import com.dragovorn.argonaut.core.nms.NMSManager;
 import com.dragovorn.argonaut.nms.protocollib.ProtocolLibNMSInterface;
@@ -63,10 +63,10 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
             return;
         }
 
-        info("Bound NMSInterface: " + this.getNMSManager().getNMSInterfaceInfo().name() + " v" + this.getNMSManager().getNMSInterfaceInfo().version());
+        info("Bound NMSInterface: " + this.getNMSManager().getNMSInterfaceInfo().name() + "!");
 
-        info("Registering listeners...");
-        register(new ServerFinishLoadingListener());
+        info("Registering manual listeners...");
+        register(new DetectAndEnableModules());
 
         // Register our command executor, which will handle the sub-command API for us.
         getCommand("argonaut").setExecutor(new ArgonautCommandExecutor());

@@ -15,5 +15,5 @@ public @interface ArgonautModule {
 
     String[] authors();
 
-    Class<? extends AbstractArgonautModule>[] dependencies();
+    Class<? extends IModule>[] dependencies();
 }

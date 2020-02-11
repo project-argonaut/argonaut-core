@@ -1,6 +1,9 @@
 package com.dragovorn.argonaut.api.module;
 
-public abstract class AbstractArgonautModule implements IModule {
+import org.bukkit.plugin.java.JavaPlugin;
+
+// TODO: Look into how implementing the Plugin interface can affect plugin loading.
+public abstract class AbstractArgonautPluginModule extends JavaPlugin implements IModule {
 
     private ArgonautModule moduleInfo;
 
