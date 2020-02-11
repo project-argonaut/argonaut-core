@@ -77,7 +77,7 @@ a lot while the plugin is still in early development.
 
 More information on the Argonaut system are below:
 
-###Why make this?
+### Why make this?
 When I was in middle school playing Minecraft with my friends we had found a server called
 [Savage Realms RPG](https://savagerealms.fandom.com/wiki/Savage_Realms_Wiki) which is no longer
 in operation. After the server stopped running I wanted to make my own server with the same
@@ -88,14 +88,14 @@ these RPG experiences, having Hypixel Skyblock re-ignite my passion for the 'gen
 that with the development of this project that I can indirectly lead to the creation of several
 other RPG servers that provide their own unique and interesting takes on the genre.
 
-###Goals
+### Goals
 The primary goal of Argonaut is to allow for the creation of RPG servers with nothing but this plugin
 and some modules to extend it. Originally I had planned for this plugin to simply provide the regions,
 dungeons, entities, NPCs, and quests functionality, while moving the other features to optional modules
 that you can download and install. But eventually I had figured that was too complex for out of the box
 development, so to make the plugin easier to setup I have decided to merge them all into the core plugin.
 
-###Modules
+### Modules
 Modules are the backbone of Argonaut and they are what make it viable for larger servers with dedicated
 development teams to use. Modules allow developers to modify and add on to the deeper functionality of
 Argonaut, while not potentially interfering with other modules. As a response to how difficult it normally
@@ -105,14 +105,14 @@ Argonaut comes with several internal modules as well, some disable-able while ot
 being important to the core functionality of the plugin. I tried to keep all of the major features listed
 to their own self-contained modules that can be disabled.
 
-###Regions
+### Regions
 Argonaut is built around the idea of having one massive map static map that is the world the RPG is set in.
 As a way to ensure that configuration files and storage doesn't get too confusing or messy the regions system
 was developed. A region is one part of the world map. An Argonaut world can technically be all one region
 but that would make it rather difficult to keep track of what's where, as well can limit nuanced functionality
 quite substantially.  
 
-####Region Features
+#### Region Features
 - Can be configured to announce their name every time upon entrance, only the first time they're
 entered, or never.
 - Can be nested, for instance you can have a region `The Shire` and there can be a region inside
