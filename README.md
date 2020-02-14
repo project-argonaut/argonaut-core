@@ -24,13 +24,22 @@ a lot while the plugin is still in early development.
     - Quests that refresh
     - Timed quests
     - One time quests
-    - Multiple quest types
+    - Multiple objectives
+    - Multiple quest steps
+    - Class requirements
+        - Race
+        - Class
+        - Level
+        - Quests
 - NPCs
     - Shops
     - Quest givers
     - Enemies
-    - Allies
-    - Companions
+    - Guards
+- Companions
+    - NPCs
+    - Animals
+    - Trust levels
 - Abilities
     - Grimoire
     - Passives
@@ -62,12 +71,17 @@ a lot while the plugin is still in early development.
 - Classes
     - Skill trees
     - Weaknesses
+    - Unique abilities
+    - Class requirements
+        - Race
+        - Level
+        - Quest
 - Entities
     - Bosses
     - Drops
     - Abilities
     - Particles
-    - Companions
+    - Weaknesses
 - Races
     - Starting stats
     - Stat growths
@@ -164,8 +178,16 @@ Common Errors
 
 TODO
 ----
-- [ ] Finish TODO list
+- [x] Finish TODO list
+- [ ] Verify feature list matches TODO list
 - [x] Initial plugin base
+- [ ] Data-loader API
+- [ ] Inventory Menu API
+- [ ] Book GUI API
+- [ ] Sign GUI API
+- [ ] Anvil GUI API
+- [ ] Hologram API
+- [ ] Permissions API
 - [x] Version interfaces
     - [x] NMS interfaces
     - [ ] ProtocolLib packet interface
@@ -181,9 +203,89 @@ TODO
 - [ ] Advanced Listener API
     - [ ] Event bus hooking
     - [ ] Service injectors
-- [ ] Inventory Menu API
-- [ ] Book GUI API
-- [ ] Sign GUI API
-- [ ] Anvil GUI API
-- [ ] Hologram API
-- [ ] Permissions API
+- [ ] Regions
+    - [ ] Ambient particles
+    - [ ] Entity spawners
+    - [ ] Data-driven loader
+    - [ ] In-game configuration
+    - [ ] Dungeon entrances
+    - [ ] NPCs
+    - [ ] Sub-regions
+- [ ] Dungeons
+    - [ ] Ambient particles
+    - [ ] Final Bosses
+    - [ ] Mini Bosses
+    - [ ] Scripted entity spawning
+    - [ ] Dungeon resetting
+    - [ ] Dungeon instances
+- [ ] Quests
+    - [ ] Cooldown repeating quests
+    - [ ] Timed quests
+    - [ ] One time quests
+    - [ ] Basic quest objectives
+    - [ ] Multi-step quests
+    - [ ] Quest requirements
+        - [ ] Class
+        - [ ] Race
+        - [ ] Level
+        - [ ] Quests
+- [ ] NPCs
+    - [ ] Shops
+    - [ ] Quest givers
+    - [ ] Enemies
+    - [ ] Allies
+    - [ ] Guards
+- [ ] Companions
+    - [ ] NPCs
+    - [ ] Animals
+    - [ ] Trust levels
+- [ ] Abilities
+    - [ ] Grimoire
+    - [ ] Passives
+        - [ ] Auras
+    - [ ] Particles
+- [ ] Stats
+    - [ ] Strength
+        - [ ] Fury
+        - [ ] Attack damage
+        - [ ] Knockback resistance
+        - [ ] Physical critical damage
+    - [ ] Intelligence
+        - [ ] Mana
+        - [ ] Magic resistance
+        - [ ] Magical damage
+        - [ ] Magical critical damage
+    - [ ] Agility
+        - [ ] Stamina
+        - [ ] Move speed
+        - [ ] Jump height
+    - [ ] Constitution
+        - [ ] HP
+        - [ ] Physical resistance
+        - [ ] Reduced food consumption
+    - [ ] Finesse
+        - [ ] Critical chance
+- [ ] Leveling
+    - [ ] XP
+- [ ] Classes
+    - [ ] Skill trees
+    - [ ] Weaknesses
+    - [ ] Unique abilities
+    - [ ] Sub-classes
+    - [ ] Class requirements
+        - [ ] Race
+        - [ ] Level
+        - [ ] Quest completion
+- [ ] Entities
+    - [ ] Bosses
+    - [ ] Drops
+    - [ ] Abilities
+    - [ ] Particles
+    - [ ] Weaknesses
+- [ ] Races
+    - [ ] Starting stats
+    - [ ] Stat growths
+    - [ ] Spawn points
+    - [ ] Weaknesses
+    - [ ] Sub-races
+    - [ ] Unique abilities
