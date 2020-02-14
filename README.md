@@ -15,6 +15,8 @@ a lot while the plugin is still in early development.
 - Regions
     - Ambient particles
     - Entity spawners
+    - Specific effects
+    - Random events
 - Dungeons
     - Ambient particles
     - Bosses
@@ -179,7 +181,7 @@ Common Errors
 TODO
 ----
 - [x] Finish TODO list
-- [ ] Verify feature list matches TODO list
+- [x] Verify feature list matches TODO list
 - [x] Initial plugin base
 - [ ] Data-loader API
 - [ ] Inventory Menu API
@@ -211,6 +213,8 @@ TODO
     - [ ] Dungeon entrances
     - [ ] NPCs
     - [ ] Sub-regions
+    - [ ] Special effects
+    - [ ] Random events
 - [ ] Dungeons
     - [ ] Ambient particles
     - [ ] Final Bosses
