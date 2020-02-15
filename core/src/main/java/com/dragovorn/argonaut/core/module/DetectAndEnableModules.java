@@ -6,20 +6,23 @@ import com.dragovorn.argonaut.api.module.ArgonautModule;
 import com.dragovorn.argonaut.api.module.IModule;
 import com.dragovorn.argonaut.api.util.StringUtil;
 import com.google.common.collect.Lists;
+import com.google.common.reflect.ClassPath;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class DetectAndEnableModules implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onServerLaunch(ServerFinishLoadingEvent event) {
-        ArgonautAPI api = ArgonautAPI.get();
+        ArgonautAPI api = event.getAPI();
 
         api.info("Detecting modules...");
 
@@ -27,14 +30,31 @@ public final class DetectAndEnableModules implements Listener {
         // TODO: Perform automatic module discovery
         List<IModule> modules = Lists.newLinkedList();
 
-        // TODO: Find and add internal modules
+        try {
+            ClassPath.from(api.getClass().getClassLoader()).getTopLevelClasses().stream()
+                    .filter(i -> api.getModuleManager().isPackage(i.getPackageName()))
+                    .map(ClassPath.ClassInfo::load)
+                    .filter(IModule.class::isAssignableFrom)
+                    .filter(c -> c.isAnnotationPresent(ArgonautModule.class))
+                    .map(aClass -> {
+                        try {
+                            return aClass.newInstance();
+                        } catch (InstantiationException | IllegalAccessException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .map(o -> (IModule) o)
+                    .collect(Collectors.toCollection(() -> modules));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Arrays.stream(Bukkit.getPluginManager().getPlugins())
                 .filter(p -> IModule.class.isAssignableFrom(p.getClass()))
                 .filter(Plugin::isEnabled)
                 .filter(p -> p.getClass().getAnnotation(ArgonautModule.class) != null)
                 .map(p -> (IModule) p)
-                .forEach(modules::add);
+                .collect(Collectors.toCollection(() -> modules));
 
         modules.forEach(m -> ArgonautAPI.get().getModuleManager()
                 .registerModule(m, m.getClass().getAnnotation(ArgonautModule.class)));

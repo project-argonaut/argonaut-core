@@ -11,9 +11,9 @@ public @interface ArgonautModule {
 
     String name();
 
-    String version();
+    String version() default "[DEFAULT]";
 
-    String[] authors();
+    String[] authors() default { };
 
-    Class<? extends IModule>[] dependencies();
+    Class<? extends IModule>[] dependencies() default { };
 }

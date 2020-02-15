@@ -3,13 +3,13 @@ package com.dragovorn.argonaut.core;
 import com.dragovorn.argonaut.api.ArgonautAPI;
 import com.dragovorn.argonaut.api.data.IDataManager;
 import com.dragovorn.argonaut.api.event.server.ServerFinishLoadingEvent;
-import com.dragovorn.argonaut.api.module.IArgonautModuleManager;
+import com.dragovorn.argonaut.api.module.IModuleManager;
 import com.dragovorn.argonaut.api.nms.INMSManager;
 import com.dragovorn.argonaut.api.util.ConcurrencyUtil;
 import com.dragovorn.argonaut.core.command.ArgonautCommandExecutor;
 import com.dragovorn.argonaut.core.data.DataManager;
 import com.dragovorn.argonaut.core.data.JSONDataLoader;
-import com.dragovorn.argonaut.core.module.ArgonautModuleManager;
+import com.dragovorn.argonaut.core.module.ModuleManager;
 import com.dragovorn.argonaut.core.module.DetectAndEnableModules;
 import com.dragovorn.argonaut.core.nms.NMSManager;
 import com.dragovorn.argonaut.nms.v1_15_r1.NMSInterface1_15_r1;
@@ -18,7 +18,7 @@ import org.bukkit.event.Listener;
 
 public final class ArgonautCorePlugin extends ArgonautAPI {
 
-    private final ArgonautModuleManager moduleManager = new ArgonautModuleManager();
+    private final ModuleManager moduleManager = new ModuleManager();
 
     private final DataManager dataManager = new DataManager();
 
@@ -62,6 +62,9 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
 
         info("Registering pre-packaged data loaders...");
         this.getDataManager().registerDataLoader(JSONDataLoader.class);
+
+        info("Registering pre-packaged internal package modules...");
+        this.getModuleManager().registerModulePackage("com.dragovorn.argonaut.core.modules");
 
         info("Detected NMS Version: " + this.getNMSManager().getNMSVersion());
         info("Binding NMS interface...");
@@ -109,7 +112,7 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
     }
 
     @Override
-    public IArgonautModuleManager getModuleManager() {
+    public IModuleManager getModuleManager() {
         return this.moduleManager;
     }
 

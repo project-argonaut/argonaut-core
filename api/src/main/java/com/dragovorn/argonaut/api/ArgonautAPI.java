@@ -1,7 +1,7 @@
 package com.dragovorn.argonaut.api;
 
 import com.dragovorn.argonaut.api.data.IDataManager;
-import com.dragovorn.argonaut.api.module.IArgonautModuleManager;
+import com.dragovorn.argonaut.api.module.IModuleManager;
 import com.dragovorn.argonaut.api.nms.INMSManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,7 +24,7 @@ public abstract class ArgonautAPI extends JavaPlugin {
 
     public abstract void error(String message);
 
-    public abstract IArgonautModuleManager getModuleManager();
+    public abstract IModuleManager getModuleManager();
 
     public abstract INMSManager getNMSManager();
 

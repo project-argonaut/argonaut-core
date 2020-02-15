@@ -192,8 +192,8 @@ TODO
 - [x] NMS Version interfaces
     - [x] v1_15_r1
 - [x] Module API
-    - [x] Plugin Modules
-    - [ ] Internal Modules
+    - [x] Plugin modules
+    - [x] Internal modules
     - [x] Loading
     - [x] Dependencies
     - [ ] Service injectors
@@ -214,8 +214,8 @@ TODO
     - [ ] Random events
 - [ ] Dungeons
     - [ ] Ambient particles
-    - [ ] Final Bosses
-    - [ ] Mini Bosses
+    - [ ] Final bosses
+    - [ ] Mini bosses
     - [ ] Scripted entity spawning
     - [ ] Dungeon resetting
     - [ ] Dungeon instances
@@ -233,8 +233,8 @@ TODO
     - [ ] Rewards
         - [ ] Vault rewards :puke:
         - [ ] Command execute rewards
-        - [ ] EXP Rewards
-        - [ ] Item Rewards
+        - [ ] EXP rewards
+        - [ ] Item rewards
 - [ ] NPCs
     - [ ] Shops
         - [ ] Vault :puke:

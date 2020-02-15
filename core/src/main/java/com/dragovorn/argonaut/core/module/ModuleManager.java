@@ -2,13 +2,12 @@ package com.dragovorn.argonaut.core.module;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
 import com.dragovorn.argonaut.api.module.ArgonautModule;
-import com.dragovorn.argonaut.api.module.IArgonautModuleManager;
 import com.dragovorn.argonaut.api.module.IModule;
+import com.dragovorn.argonaut.api.module.IModuleManager;
 import com.dragovorn.argonaut.api.util.StringUtil;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +16,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 
-public final class ArgonautModuleManager implements IArgonautModuleManager, Listener {
+public final class ModuleManager implements IModuleManager {
 
     private final Map<Class<? extends IModule>, IModule> registeredModulesByClass = Maps.newHashMap();
 
@@ -45,7 +44,18 @@ public final class ArgonautModuleManager implements IArgonautModuleManager, List
 
         for (IModule module : this.enableOrder) {
             ArgonautModule info = module.getModuleInfo();
-            api.info("Enabling module: " + info.name() + " (v " + info.version() + ") by: " + Arrays.toString(info.authors()) + "...");
+
+            String version = ArgonautAPI.get().getDescription().getVersion();
+            if (!info.version().equals("[DEFAULT]")) {
+                version = info.version();
+            }
+
+            if (info.authors().length == 0) {
+                api.info("Enabling module: " + info.name() + " (v" + version + ")...");
+            } else {
+                api.info("Enabling module: " + info.name() + " (v" + version + ") by: " + Arrays.toString(info.authors()) + "...");
+            }
+
             try {
                 module.onModuleEnable(ArgonautAPI.get());
                 api.info("Enabled module: " + info.name() + "!");
@@ -78,7 +88,7 @@ public final class ArgonautModuleManager implements IArgonautModuleManager, List
             return;
         }
 
-        this.enableOrder.addFirst(module);
+        this.enableOrder.add(module);
     }
 
     @Override
@@ -111,7 +121,11 @@ public final class ArgonautModuleManager implements IArgonautModuleManager, List
 
     @Override
     public void registerModulePackage(String packagePath) {
+        if (this.modulePaths.contains(packagePath)) {
+            return;
+        }
 
+        this.modulePaths.add(packagePath);
     }
 
     @Override
@@ -130,6 +144,17 @@ public final class ArgonautModuleManager implements IArgonautModuleManager, List
     @Override
     public boolean isRegistered(String name) {
         return this.registeredModulesByString.containsKey(name);
+    }
+
+    @Override
+    public boolean isPackage(String packageName) {
+        for (String path : this.modulePaths) {
+            if (packageName.startsWith(path)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

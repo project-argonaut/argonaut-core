@@ -2,7 +2,7 @@ package com.dragovorn.argonaut.api.module;
 
 import com.google.common.collect.ImmutableList;
 
-public interface IArgonautModuleManager {
+public interface IModuleManager {
 
     void enableModules();
 
@@ -15,6 +15,8 @@ public interface IArgonautModuleManager {
     boolean isRegistered(Class<? extends IModule> clazz);
 
     boolean isRegistered(String name);
+
+    boolean isPackage(String packageName);
 
     IModule getModule(Class<? extends IModule> clazz);
 
