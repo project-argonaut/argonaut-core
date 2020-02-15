@@ -4,7 +4,9 @@ import com.dragovorn.argonaut.api.ArgonautAPI;
 import com.dragovorn.argonaut.api.data.DataLoader;
 import com.dragovorn.argonaut.api.data.IDataLoader;
 import com.dragovorn.argonaut.api.data.IDataManager;
+import com.dragovorn.argonaut.api.event.DataLoaderChangeEvent;
 import com.google.common.collect.Maps;
+import org.bukkit.Bukkit;
 
 import java.util.Map;
 
@@ -24,6 +26,11 @@ public final class DataManager implements IDataManager {
             ArgonautAPI.get().error("Failed to find data loader " + internal + "!");
             return;
         }
+
+        DataLoaderChangeEvent event = new DataLoaderChangeEvent(internal);
+        Bukkit.getPluginManager().callEvent(event);
+
+        internal = event.getDataLoader();
 
         try {
             this.dataLoader = this.registeredDataLoaders.get(internal).newInstance();
