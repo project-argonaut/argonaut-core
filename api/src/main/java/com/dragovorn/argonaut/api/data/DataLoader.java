@@ -1,4 +1,4 @@
-package com.dragovorn.argonaut.api.nms;
+package com.dragovorn.argonaut.api.data;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface NMSInterface {
+public @interface DataLoader {
 
     String name();
 

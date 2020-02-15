@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>core</artifactId>
+    <name>Argonaut Plugin</name>
 
     <build>
         <finalName>argonaut-core</finalName>
@@ -55,7 +56,7 @@
 
         <dependency>
             <groupId>com.dragovorn.argonaut</groupId>
-            <artifactId>protocol-lib</artifactId>
+            <artifactId>v1_15_r1</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>

@@ -9,27 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>protocol-lib</artifactId>
-
-    <repositories>
-        <repository>
-            <id>dmulloy2-repo</id>
-            <url>https://repo.dmulloy2.net/nexus/repository/public/</url>
-        </repository>
-    </repositories>
+    <artifactId>v1_15_r1</artifactId>
+    <name>v1.15 Interface</name>
 
     <dependencies>
         <dependency>
             <groupId>com.dragovorn.argonaut</groupId>
             <artifactId>api</artifactId>
             <version>${project.parent.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib</artifactId>
-            <version>4.5.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -1,7 +1,8 @@
 Argonaut Core
 =============
 [![Build Status](https://travis-ci.org/project-argonaut/argonaut-core.svg?branch=master)](https://travis-ci.org/project-argonaut/argonaut-core)
-[![GitHub issues](https://img.shields.io/github/issues/project-argonaut/argonaut-core)](https://github.com/project-argonaut/argonaut-core/issues/)
+[![GitHub issues](https://img.shields.io/github/issues/project-argonaut/argonaut-core)](https://github.com/project-argonaut/argonaut-core/issues/)  
+**Argonaut is built using Bukkit API Version 1.15, and that will not be changed**  
 
 About
 -----
@@ -33,6 +34,11 @@ a lot while the plugin is still in early development.
         - Class
         - Level
         - Quests
+    - Rewards
+        - Vault rewards :puke:
+        - Command execute rewards
+        - EXP Rewards
+        - Item Rewards
 - NPCs
     - Shops
     - Quest givers
@@ -146,19 +152,12 @@ in this region on spawnable blocks, if the provided constraints are met.
 
 Setup
 -----
-Argonaut currently relies on ProtocolLib, please install it along with Argonaut!  
-  
 When configuring permissions, please do not remove the `argonaut.command` permission from any users
 you wish to be able play with argonaut. It will not grant permission to configuration commands, it
 will only provide access to the commands necessary for argonaut to manage the player.
 
 Permissions
 -----------
-- `argonaut.command` - Only remove from those not allowed to play with argonaut.
-- `argonaut.command.*` - This will grant access to all argonaut commands, **will allow access to configuration commands!**
-- `argonaut.command.version` - Grants access to the `/argonaut version` command.
-- `argonaut.command.region.*` - This will allow access to all region configuration commands.
-- `argonaut.command.region.create` - This will allow access to the `/argonaut region create <name>` command.  
 **TODO**
 
 Commands
@@ -183,17 +182,15 @@ TODO
 - [x] Finish TODO list
 - [x] Verify feature list matches TODO list
 - [x] Initial plugin base
-- [ ] Data-loader API
+- [x] Data-loader API
 - [ ] Inventory Menu API
 - [ ] Book GUI API
 - [ ] Sign GUI API
 - [ ] Anvil GUI API
 - [ ] Hologram API
 - [ ] Permissions API
-- [x] Version interfaces
-    - [x] NMS interfaces
-    - [ ] ProtocolLib packet interface
-    - [ ] Bukkit API interfaces
+- [x] NMS Version interfaces
+    - [x] v1_15_r1
 - [x] Module API
     - [x] Plugin Modules
     - [ ] Internal Modules
@@ -233,8 +230,14 @@ TODO
         - [ ] Race
         - [ ] Level
         - [ ] Quests
+    - [ ] Rewards
+        - [ ] Vault rewards :puke:
+        - [ ] Command execute rewards
+        - [ ] EXP Rewards
+        - [ ] Item Rewards
 - [ ] NPCs
     - [ ] Shops
+        - [ ] Vault :puke:
     - [ ] Quest givers
     - [ ] Enemies
     - [ ] Allies

@@ -1,5 +1,6 @@
 package com.dragovorn.argonaut.core.nms;
 
+import com.dragovorn.argonaut.api.ArgonautAPI;
 import com.dragovorn.argonaut.api.event.NMSInterfaceChangeEvent;
 import com.dragovorn.argonaut.api.nms.INMSInterface;
 import com.dragovorn.argonaut.api.nms.INMSManager;
@@ -12,6 +13,7 @@ import java.util.Map;
 public final class NMSManager implements INMSManager {
 
     private final Map<String, Class<? extends INMSInterface>> registeredNMSInterfaces = Maps.newHashMap();
+
     private final Map<Class<? extends INMSInterface>, NMSInterface> nmsInterfaceInfo = Maps.newHashMap();
 
     private final String nmsVersion = Bukkit.getServer().getClass().getPackage().getName().substring(
@@ -21,11 +23,7 @@ public final class NMSManager implements INMSManager {
 
     @Override
     public void bindNMSInterface() {
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
-            useNMSInterface("protocol-lib");
-        } else {
-            useNMSInterface(this.nmsVersion.toLowerCase());
-        }
+        useNMSInterface(this.nmsVersion.toLowerCase());
     }
 
     @Override
@@ -36,11 +34,11 @@ public final class NMSManager implements INMSManager {
             throw new IllegalStateException(nmsInterface.getCanonicalName() + " doesn't have a NMSInterface annotation.");
         }
 
-        if (this.registeredNMSInterfaces.containsKey(interfaceInfo.internalName())) {
-            throw new IllegalStateException("An NMS interface with internal name " + interfaceInfo.internalName() + " exists!");
+        if (this.registeredNMSInterfaces.containsKey(interfaceInfo.internal())) {
+            throw new IllegalStateException("An NMS interface with internal name " + interfaceInfo.internal() + " exists!");
         }
 
-        this.registeredNMSInterfaces.put(interfaceInfo.internalName(), nmsInterface);
+        this.registeredNMSInterfaces.put(interfaceInfo.internal(), nmsInterface);
         this.nmsInterfaceInfo.put(nmsInterface, interfaceInfo);
     }
 
@@ -69,19 +67,15 @@ public final class NMSManager implements INMSManager {
             throw new IllegalStateException("Cannot change nmsInterface after it has been initialized!");
         }
 
-        INMSInterface nmsInterface = instantiateNMSInterface(internalName);
         NMSInterfaceChangeEvent event = new NMSInterfaceChangeEvent(internalName);
         Bukkit.getPluginManager().callEvent(event);
 
-        if (!event.getNMSInterface().equals(internalName)) {
-            INMSInterface other = instantiateNMSInterface(event.getNMSInterface());
-
-            if (other != null) {
-                nmsInterface = other;
-            }
+        if (!this.registeredNMSInterfaces.containsKey(event.getNMSInterface())) {
+            ArgonautAPI.get().error("Failed to find NMSInterface: " + event.getNMSInterface());
+            return;
         }
 
-        this.nmsInterface = nmsInterface;
+        this.nmsInterface = instantiateNMSInterface(event.getNMSInterface());
     }
 
     private INMSInterface instantiateNMSInterface(String key) {
