@@ -1,5 +1,6 @@
 package com.dragovorn.argonaut.api.module;
 
+import com.dragovorn.argonaut.api.annotation.ArgonautModule;
 import com.google.common.collect.ImmutableList;
 
 public interface IModuleManager {

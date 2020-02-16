@@ -1,7 +1,7 @@
 package com.dragovorn.argonaut.core.module;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
-import com.dragovorn.argonaut.api.module.ArgonautModule;
+import com.dragovorn.argonaut.api.annotation.ArgonautModule;
 import com.dragovorn.argonaut.api.module.IModule;
 import com.dragovorn.argonaut.api.module.IModuleManager;
 import com.dragovorn.argonaut.api.util.StringUtil;

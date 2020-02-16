@@ -1,4 +1,4 @@
-package com.dragovorn.argonaut.api.event;
+package com.dragovorn.argonaut.api.event.bukkit;
 
 public class NMSInterfaceChangeEvent extends ArgonautEvent {
 

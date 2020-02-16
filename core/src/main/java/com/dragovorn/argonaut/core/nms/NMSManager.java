@@ -1,10 +1,10 @@
 package com.dragovorn.argonaut.core.nms;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
-import com.dragovorn.argonaut.api.event.NMSInterfaceChangeEvent;
+import com.dragovorn.argonaut.api.event.bukkit.NMSInterfaceChangeEvent;
 import com.dragovorn.argonaut.api.nms.INMSInterface;
 import com.dragovorn.argonaut.api.nms.INMSManager;
-import com.dragovorn.argonaut.api.nms.NMSInterface;
+import com.dragovorn.argonaut.api.annotation.NMSInterface;
 import com.google.common.collect.Maps;
 import org.bukkit.Bukkit;
 

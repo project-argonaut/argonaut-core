@@ -2,15 +2,17 @@ package com.dragovorn.argonaut.core;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
 import com.dragovorn.argonaut.api.data.IDataManager;
-import com.dragovorn.argonaut.api.event.server.ServerFinishLoadingEvent;
+import com.dragovorn.argonaut.api.event.IEventBus;
+import com.dragovorn.argonaut.api.event.bukkit.server.ServerLaunchEvent;
 import com.dragovorn.argonaut.api.module.IModuleManager;
 import com.dragovorn.argonaut.api.nms.INMSManager;
 import com.dragovorn.argonaut.api.util.ConcurrencyUtil;
 import com.dragovorn.argonaut.core.command.ArgonautCommandExecutor;
 import com.dragovorn.argonaut.core.data.DataManager;
 import com.dragovorn.argonaut.core.data.JSONDataLoader;
-import com.dragovorn.argonaut.core.module.ModuleManager;
+import com.dragovorn.argonaut.core.event.ArgonautEventBus;
 import com.dragovorn.argonaut.core.module.DetectAndEnableModules;
+import com.dragovorn.argonaut.core.module.ModuleManager;
 import com.dragovorn.argonaut.core.nms.NMSManager;
 import com.dragovorn.argonaut.nms.v1_15_r1.NMSInterface1_15_r1;
 import org.bukkit.Bukkit;
@@ -23,6 +25,8 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
     private final DataManager dataManager = new DataManager();
 
     private final NMSManager nmsManager = new NMSManager();
+
+    private final ArgonautEventBus eventBus = new ArgonautEventBus();
 
     @Override
     public void onLoad() {
@@ -94,13 +98,13 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
         }
 
         // 'Register' this to make sure the event is fired if the server successfully starts
-        ConcurrencyUtil.syncLater(() -> Bukkit.getPluginManager().callEvent(new ServerFinishLoadingEvent()), 1);
+        ConcurrencyUtil.syncLater(() -> Bukkit.getPluginManager().callEvent(new ServerLaunchEvent()), 1);
 
         info("Bound data loader: " + this.getDataManager().getDataLoaderInfo().name() + "!");
         info("Bound NMS interface: " + this.getNMSManager().getNMSInterfaceInfo().name() + "!");
 
         info("Registering manual listeners...");
-        register(new DetectAndEnableModules());
+        this.eventBus.registerListener(DetectAndEnableModules.class);
 
         // Register our command executor, which will handle the sub-command API for us.
         getCommand("argonaut").setExecutor(new ArgonautCommandExecutor());
@@ -124,6 +128,11 @@ public final class ArgonautCorePlugin extends ArgonautAPI {
     @Override
     public IDataManager getDataManager() {
         return this.dataManager;
+    }
+
+    @Override
+    public IEventBus getEventBus() {
+        return this.eventBus;
     }
 
     private void register(Listener listener) {

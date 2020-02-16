@@ -1,5 +1,7 @@
 package com.dragovorn.argonaut.api.data;
 
+import com.dragovorn.argonaut.api.annotation.DataLoader;
+
 public interface IDataManager {
 
     void bindDataLoader();

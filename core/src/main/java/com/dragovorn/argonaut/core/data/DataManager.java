@@ -1,10 +1,10 @@
 package com.dragovorn.argonaut.core.data;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
-import com.dragovorn.argonaut.api.data.DataLoader;
+import com.dragovorn.argonaut.api.annotation.DataLoader;
 import com.dragovorn.argonaut.api.data.IDataLoader;
 import com.dragovorn.argonaut.api.data.IDataManager;
-import com.dragovorn.argonaut.api.event.DataLoaderChangeEvent;
+import com.dragovorn.argonaut.api.event.bukkit.DataLoaderChangeEvent;
 import com.google.common.collect.Maps;
 import org.bukkit.Bukkit;
 

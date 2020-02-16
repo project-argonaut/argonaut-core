@@ -1,5 +1,6 @@
 package com.dragovorn.argonaut.api.module;
 
+import com.dragovorn.argonaut.api.annotation.ArgonautModule;
 import org.bukkit.plugin.java.JavaPlugin;
 
 // TODO: Look into how implementing the Plugin interface can affect plugin loading.

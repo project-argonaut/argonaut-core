@@ -1,5 +1,7 @@
 package com.dragovorn.argonaut.api.module;
 
+import com.dragovorn.argonaut.api.annotation.ArgonautModule;
+
 public abstract class AbstractArgonautModule implements IModule {
 
     private ArgonautModule moduleInfo;

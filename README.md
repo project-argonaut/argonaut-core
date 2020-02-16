@@ -189,19 +189,20 @@ TODO
 - [ ] Anvil GUI API
 - [ ] Hologram API
 - [ ] Permissions API
+- [ ] Command API
 - [x] NMS Version interfaces
-    - [x] v1_15_r1
+    - [ ] Reflective interface
+    - [x] v1_15_r1 (1.15.x)
+- [ ] Service System
+    - [ ] Register service providers
+    - [ ] Injectors
 - [x] Module API
     - [x] Plugin modules
     - [x] Internal modules
     - [x] Loading
     - [x] Dependencies
-    - [ ] Service injectors
-- [ ] Command API
-    - [ ] Service injectors
 - [ ] Advanced Listener API
-    - [ ] Event bus hooking
-    - [ ] Service injectors
+    - [ ] Completely custom EventBus
 - [ ] Regions
     - [ ] Ambient particles
     - [ ] Entity spawners

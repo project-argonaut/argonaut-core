@@ -11,6 +11,6 @@ public final class StringUtil {
     }
 
     public static String getPluralWord(String word, String plural, int amount) {
-        return (amount > 0 ? word : plural);
+        return (amount > 1 || amount < -1 ? word : plural);
     }
 }

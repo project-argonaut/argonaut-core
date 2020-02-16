@@ -1,14 +1,15 @@
 package com.dragovorn.argonaut.core.module;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
-import com.dragovorn.argonaut.api.event.server.ServerFinishLoadingEvent;
-import com.dragovorn.argonaut.api.module.ArgonautModule;
+import com.dragovorn.argonaut.api.annotation.ArgonautModule;
+import com.dragovorn.argonaut.api.annotation.Event;
+import com.dragovorn.argonaut.api.annotation.Executor;
+import com.dragovorn.argonaut.api.event.bukkit.server.ServerLaunchEvent;
 import com.dragovorn.argonaut.api.module.IModule;
 import com.dragovorn.argonaut.api.util.StringUtil;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.ClassPath;
 import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -20,14 +21,12 @@ import java.util.stream.Collectors;
 
 public final class DetectAndEnableModules implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onServerLaunch(ServerFinishLoadingEvent event) {
+    @Executor(priority = EventPriority.LOWEST)
+    public void onServerLaunch(@Event ServerLaunchEvent event) {
         ArgonautAPI api = event.getAPI();
 
         api.info("Detecting modules...");
 
-        // Enable our modules and make argonaut aware of them
-        // TODO: Perform automatic module discovery
         List<IModule> modules = Lists.newLinkedList();
 
         try {

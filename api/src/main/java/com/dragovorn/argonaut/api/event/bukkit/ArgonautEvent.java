@@ -1,4 +1,4 @@
-package com.dragovorn.argonaut.api.event;
+package com.dragovorn.argonaut.api.event.bukkit;
 
 import com.dragovorn.argonaut.api.ArgonautAPI;
 import org.bukkit.event.Event;

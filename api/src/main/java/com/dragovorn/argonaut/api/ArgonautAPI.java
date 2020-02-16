@@ -1,6 +1,7 @@
 package com.dragovorn.argonaut.api;
 
 import com.dragovorn.argonaut.api.data.IDataManager;
+import com.dragovorn.argonaut.api.event.IEventBus;
 import com.dragovorn.argonaut.api.module.IModuleManager;
 import com.dragovorn.argonaut.api.nms.INMSManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,4 +30,6 @@ public abstract class ArgonautAPI extends JavaPlugin {
     public abstract INMSManager getNMSManager();
 
     public abstract IDataManager getDataManager();
+
+    public abstract IEventBus getEventBus();
 }

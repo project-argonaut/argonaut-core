@@ -1,4 +1,4 @@
-package com.dragovorn.argonaut.api.nms;
+package com.dragovorn.argonaut.api.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,10 +6,5 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface NMSInterface {
-
-    String name();
-
-    String internal();
-}
+@Target(ElementType.PARAMETER)
+public @interface Event { }
